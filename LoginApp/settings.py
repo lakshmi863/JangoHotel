@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-t))2ap4l3188e9p**5(&#hystekmdonqxh6#ungh9zt%w$4x9c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['jangohotel-4.onrender.com']
+ALLOWED_HOSTS = ['jangohotel-5.onrender.com']
 
 
 # Application definition
