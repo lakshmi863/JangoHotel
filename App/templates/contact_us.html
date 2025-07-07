@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+          /* Navbar Styles */
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], textarea, input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 150px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+<nav>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+        <!-- Logo Section -->
+        <div style="display: flex; align-items: center;">
+            <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/gold-luxury-hotel-logo-design-template-93a029149b4a83e85ac134230f8f2e63_screen.jpg?ts=1660122257" alt="Company Logo" 
+            
+            style="height: 60px; margin-right: 20px;width:90px; border-radius:12px;">
+            <!-- Navigation Links -->
+            <ul style="margin: 0; padding: 0; display: flex; align-items: center; list-style: none;">
+                <a href="{% url 'home' %}">Home</a>
+                <li><a href="{% url 'hotels' %}">Hotels</a></li>
+              
+                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Search Input -->
+        <div style="display: flex; align-items: center;">
+            <input 
+                type="text" 
+                placeholder="Search..." 
+                style="padding: 8px 12px; border-radius: 20px; border: 1px solid #ddd; outline: none; width: 200px; transition: all 0.3s;">
+            <button 
+                style="padding: 8px 12px; margin-left: 10px; background-color: #FF6347; color: white; border: none; border-radius: 20px; cursor: pointer; transition: background-color 0.3s;">
+                Search
+            </button>
+        
+        <div class="auth-links">
+            <a href="{% url 'signup' %}">Signup</a>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+        </div>
+    </div>
+</nav>
+
+    <div class="container">
+        
+        <h1>Contact Us</h1>
+
+        <form method="POST" action="{% url 'submit_contact_form' %}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+            </div>
+
+            <input type="submit" class="btn" value="Send Message">
+        </form>
+
+        <div class="back-link">
+            <a href="{% url 'home' %}">Back to Home</a>
+        </div>
+    </div>
+
+</body>
+</html>

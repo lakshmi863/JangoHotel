@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Homepage</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(90deg, white 0%, 
+    lightgreen 80%, darkblue 100%)
+           
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        /* Main Content Styles */
+        .container {
+            padding-top: 70px; /* Space for the fixed navbar */
+            text-align: center;
+            color: #333;
+            width: 100%; /* Full width of the viewport */
+    height: 100vh;
+            background-image: url('');
+            background-size: cover; /* Ensures the full image is displayed */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat;
+        }
+
+        .container h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            padding:15px;
+           
+        }
+
+        .container p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .about-section {
+            padding: 40px 20px;
+            background-color: #fff;
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .about-section h2 {
+            color: #FF6347;
+            font-size: 2.5rem;
+            padding:3px;
+        }
+
+        .about-section img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button {
+            background-color: #FF6347;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #FF4500;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between; /* Add space between the text and image */
+            align-items: center; /* Align items vertically */
+          /* Optional: Add space between the containers */
+            padding: 20px;
+        }
+        
+        /* Text content styling */
+        .container {
+            flex: 1; /* Allow text to take up available space */
+            padding: 20px;
+            text-align: left;
+            color: #333;
+         
+        }
+        
+        /* Image container styling */
+        .image-container {
+            flex: 1.11;
+            display: flex;
+            justify-content: center; /* Centers the image horizontally */
+            align-items: flex-start; /* Aligns the image to the top */
+            padding-top: 0.0rem;
+            
+        }
+        
+        .image-container img {
+            max-width: 100%; /* Ensure the image scales properly */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px; /* Optional: Add rounded corners */
+             border-top: 5px solid #fff6eb /* Solid border for top */
+            border-left: 5px solid #007bff; /* Solid border for left */
+            border-right: 5px dashedrgb(51, 255, 252); /* Dashed border for right */
+            border-bottom: 5px dashedrgb(19, 9, 123);
+            box-shadow: 
+            -9px -5px 0 0 #fff6eb, /* Top border (solid, left to right) */
+            /* Left border (solid, top to bottom) */
+            5px 5px 0 0 #ff5733 inset, /* Right border (dashed, using inset for effect) */
+            5px -5px 0 0 #ff5733 inset; 
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+        .heading-style{
+            color: #36454f;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes slideInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px); /* Start above the normal position */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* End at the normal position */
+            }
+        }
+        
+        /* Apply the animation to the .container */
+        .container {
+            animation: slideInDown 1s ease-out; /* Apply the animation */
+            /* Optionally, you can set an animation delay */
+            /* animation-delay: 1s; */
+        }
+
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8); /* Initial smaller size */
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1); /* Final size */
+            }
+        }
+        
+        .image-container {
+            animation: fadeInScale 2s ease-out; /* Apply animation */
+            /* Optionally, you can set an animation delay */
+            /* animation-delay: 1s; */
+        }
+       
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <!-- Navbar -->
+<nav>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+        <!-- Logo Section -->
+        <div style="display: flex; align-items: center;">
+            <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/gold-luxury-hotel-logo-design-template-93a029149b4a83e85ac134230f8f2e63_screen.jpg?ts=1660122257" alt="Company Logo" 
+            
+            style="height: 60px; margin-right: 20px;width:90px; border-radius:12px;">
+            <!-- Navigation Links -->
+            <ul style="margin: 0; padding: 0; display: flex; align-items: center; list-style: none;">
+                <a href="{% url 'home' %}">Home</a>
+                <li><a href="{% url 'hotels' %}">Hotels</a></li>
+              
+                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Search Input -->
+        <div style="display: flex; align-items: center;">
+            <input 
+                type="text" 
+                placeholder="Search..." 
+                style="padding: 8px 12px; border-radius: 20px; border: 1px solid #ddd; outline: none; width: 200px; transition: all 0.3s;">
+            <button 
+                style="padding: 8px 12px; margin-left: 10px; background-color: #FF6347; color: white; border: none; border-radius: 20px; cursor: pointer; transition: background-color 0.3s;">
+                Search
+            </button>
+        
+        <div class="auth-links">
+            <a href="{% url 'signup' %}">Signup</a>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Text Content -->
+        <div class="container">
+            <h1 class="heading-style">Experience Unmatched Elegance at Our Luxury Hotel</h1>
+           
+    
+            <!-- About Section -->
+            <h2>About Our Hotel</h2>
+            <p>Our hotel is located in the heart of the city, offering easy access to shopping, entertainment, and cultural attractions. With spacious rooms, top-notch dining, and a wide array of services, we cater to the needs of every guest. We strive to provide a peaceful and luxurious stay for everyone.</p>
+            <a href="#" class="cta-button">Book Your Stay</a>
+        </div>
+    
+        <!-- Image Content -->
+        <div class="image-container">
+            <img src="https://media.licdn.com/dms/image/v2/D4E12AQE0RFAiLULyxQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1692699965268?e=2147483647&v=beta&t=gA4C9q8cSZbJ4CW0nGS7wohmGdAEw0ahP_GL5hAoow8" alt="Luxury Hotel Image">
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Luxury Hotel. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

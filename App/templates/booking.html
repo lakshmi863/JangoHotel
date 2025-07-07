@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking - {{ hotel.name }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+nav {
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 50px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .payment-methods ul,
+        .special-offers ul {
+            list-style: none;
+            padding: 0;
+        }
+        .payment-methods li,
+        .special-offers li {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out; /* Smooth transition on hover */
+        }
+        .payment-methods li:hover,
+        .special-offers li:hover {
+            background-color: #e8e8e8;
+            color: #007bff;  /* Change color on hover */
+            transform: scale(1.05);  /* Slightly enlarge on hover */
+        }
+        .payment-methods li:active {
+            background-color: #ddd;  /* Slight color change on click */
+        }
+        .advertisements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .advertisement-item {
+            width: 30%;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .advertisement-item img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        .advertisement-item:hover {
+            transform: translateY(-10px);  /* Slight lift effect */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Add shadow on hover */
+        }
+        .chart-container {
+            margin-top: 20px;
+        }
+        .chart-container canvas {
+            max-width: 100%;
+            height: 300px;
+        }
+        special_offers = [
+    {
+        "description": "Save 20% on your booking",
+        "discount": 20,
+        "image_url": "https://www.easemytrip.com/images/hotel-img/emtgo-23apr-lp1.png"
+    },
+    {
+        "description": "Get a free dinner with your stay",
+        "discount": 10,
+        "image_url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIREhUSERIWFRUVFRgVFhUXFRcbFRoaGRgXGBgaGhsYHiggGBolHRUXIjEhJSsrLi8uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lICUtLS0tLy8rLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAM0A9gMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAABAECAwUGBwj/xABJEAACAQIEAgcFBQQFCgcAAAABAgADEQQSITEFQQYTIlFhgZEUMlJxoQdCkrHRFcHh8CMzYnLSFkNTVGODk6KywiQlNER0gvH/xAAaAQEAAgMBAAAAAAAAAAAAAAAAAgQBAwUG/8QAPREAAQMCAgYHBQYFBQAAAAAAAQACEQMhBDEFEkFRYZETFBVxobHRBiJSgfAjMlPB4fEzNEKCkhZyk6Li/9oADAMBAAIRAxEAPwDrYiJcXm10vRL3H+Y/Kb+c70WYLTqMdgbnyE1+MxFfEXYXyXsFU7agajme0JXLZcV1adcUqDbSYyXZTSdKv6lf74/6Wmjw2Ir0DezAcwwOU+u03PSGsHw6uNmII81aAyHBZdXFWi8RBAXMxESwuSkREIrqcuJlizYcKwC1iQXyka2tuPDWRcYuttNpdDW5qATF5J4pQWnUKISbWuT389vKRJkXWHS0kHYq3lLxEyoSl4iIWFWUiIRIiIRIiIRIl9C17G2o2Ox8L/dPjJN13... "
+    }
+]
+    </style>
+</head>
+<body>
+
+ <div>
+        <nav>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+        <!-- Logo Section -->
+        <div style="display: flex; align-items: center;">
+            <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/gold-luxury-hotel-logo-design-template-93a029149b4a83e85ac134230f8f2e63_screen.jpg?ts=1660122257" alt="Company Logo" 
+            
+            style="height: 60px; margin-right: 20px;width:90px; border-radius:12px;">
+            <!-- Navigation Links -->
+            <ul style="margin: 0; padding: 0; display: flex; align-items: center; list-style: none;">
+                <a href="{% url 'home' %}">Home</a>
+                <li><a href="{% url 'hotels' %}">Hotels</a></li>
+              
+                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Search Input -->
+        <div style="display: flex; align-items: center;">
+            <input 
+                type="text" 
+                placeholder="Search..." 
+                style="padding: 8px 12px; border-radius: 20px; border: 1px solid #ddd; outline: none; width: 200px; transition: all 0.3s;">
+            <button 
+                style="padding: 8px 12px; margin-left: 10px; background-color: #FF6347; color: white; border: none; border-radius: 20px; cursor: pointer; transition: background-color 0.3s;">
+                Search
+            </button>
+        
+        <div class="auth-links">
+            <a href="{% url 'signup' %}">Signup</a>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+        </div>
+    </div>
+</nav>
+
+    </div>
+
+ 
+    <div class="container">
+        
+    <header>
+        <h1>Book Your Stay at {{ hotel.name }}</h1>
+    </header>
+        <p><strong>City:</strong> {{ hotel.city }}</p>
+        <p><strong>Room Type:</strong> {{ hotel.room_type }}</p>
+        <p><strong>Guest Capacity:</strong> {{ hotel.guest_capacity }}</p>
+        <p><strong>Price:</strong> ₹{{ hotel.price }}</p>
+        <p><strong>Rating:</strong> {{ hotel.rating }}</p>
+
+        <!-- Payment Methods -->
+        <div class="payment-methods">
+            <h2>Payment Options</h2>
+            <ul>
+                {% for method in payment_methods %}
+                    <li data-method="{{ method }}" onclick="handlePaymentClick('{{ method }}')">{{ method }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-container">
+            <h2>Booking Trends</h2>
+            <canvas id="bookingChart"></canvas>
+            <script>
+                const ctx = document.getElementById('bookingChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: {{ chart_data.labels|safe }},
+                        datasets: [{
+                            label: 'Bookings Over Time',
+                            data: {{ chart_data.values|safe }},
+                            borderColor: 'blue',
+                            fill: false,
+                        }],
+                    },
+                });
+            </script>
+        </div>
+
+        <!-- Special Offers -->
+        <div class="special-offers">
+            <h2>Special Offers</h2>
+            <ul>
+                {% for offer in special_offers %}
+                    <li>{{ offer.description }} - {{ offer.discount }}%</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Advertisements -->
+        <div class="advertisements">
+            <h2>Advertisements</h2>
+            {% for ad in advertisements %}
+                <div class="advertisement-item">
+                    <img src="{{ ad.image_url }}" alt="{{ ad.title }}">
+                    <p>{{ ad.title }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        // JavaScript function to handle payment method click
+        function handlePaymentClick(method) {
+            alert("You selected the " + method + " payment method.");
+            
+            // Perform actions based on the selected payment method
+            if (method === 'Credit Card') {
+                // Redirect to Credit Card payment page
+                window.location.href = '/credit-card-payment/';
+            } else if (method === 'PayPal') {
+                // Redirect to PayPal payment page
+                window.location.href = '/paypal-payment/';
+            } else {
+                // Default action for other payment methods
+                console.log("Selected payment method:", method);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ hotel.name }}</title>
+    
+</head>
+<body>
+    
+    <h1>{{ hotel.name }}</h1>
+    <img src="{{ hotel.image }}" alt="{{ hotel.name }}" style="width:400px; height:300px;">
+    <p>Rating: {{ hotel.rating }}</p>
+    <p>Price: ${{ hotel.price }}</p>
+    <p>Room Type: {{ hotel.room_type }}</p>
+    <a href="{% url 'hotel_list' %}">Back to List</a>
+</body>
+</html>

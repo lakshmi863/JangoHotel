@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+            nav {
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+            color: #444;
+            padding:60px;
+            margin:30px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: #555;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"] {
+            width: 180px;
+            padding: 6px;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: center;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .hotel-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .hotel-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 280px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #ffffff;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .hotel-card h3 {
+            font-size: 1.5rem;
+            margin: 10px;
+            color: #222;
+        }
+
+        .hotel-card p {
+            margin: 5px 10px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .hotel-card .price {
+            font-size: 1.2rem;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .hotel-card .rating {
+            font-size: 1rem;
+            color: #f39c12;
+        }
+
+        .hotel-card .room-type {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+
+        select:focus {
+            border-color: #007bff;
+        }
+    .click-button{
+        margin:8px;
+        padding:5px;
+    }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <nav>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+        <!-- Logo Section -->
+        <div style="display: flex; align-items: center;">
+            <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/gold-luxury-hotel-logo-design-template-93a029149b4a83e85ac134230f8f2e63_screen.jpg?ts=1660122257" alt="Company Logo" 
+            
+            style="height: 60px; margin-right: 20px;width:90px; border-radius:12px;">
+            <!-- Navigation Links -->
+            <ul style="margin: 0; padding: 0; display: flex; align-items: center; list-style: none;">
+                <a href="{% url 'home' %}">Home</a>
+                <li><a href="{% url 'hotels' %}">Hotels</a></li>
+              
+                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Search Input -->
+        <div style="display: flex; align-items: center;">
+            <input 
+                type="text" 
+                placeholder="Search..." 
+                style="padding: 8px 12px; border-radius: 20px; border: 1px solid #ddd; outline: none; width: 200px; transition: all 0.3s;">
+            <button 
+                style="padding: 8px 12px; margin-left: 10px; background-color: #FF6347; color: white; border: none; border-radius: 20px; cursor: pointer; transition: background-color 0.3s;">
+                Search
+            </button>
+        
+        <div class="auth-links">
+            <a href="{% url 'signup' %}">Signup</a>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+        </div>
+    </div>
+</nav>
+
+    </div>
+
+    <h2>Hotels in {{ request.GET.city }}</h2>  <!-- Display the selected city -->
+
+    <!-- City, Check-in, Check-out, Guests, and Rooms Filters -->
+    <form method="GET" action="">
+        <div class="form-group">
+            <div>
+                <label for="city">Area, Landmark or Property Name:</label>
+                <input type="text" id="city" name="city" value="{{ request.GET.city }}" placeholder="Enter city">
+            </div>
+            <div>
+                <label for="checkin">Check-in:</label>
+                <input type="date" id="checkin" name="checkin" value="{{ request.GET.checkin }}">
+            </div>
+            <div>
+                <label for="checkout">Check-out:</label>
+                <input type="date" id="checkout" name="checkout" value="{{ request.GET.checkout }}">
+            </div>
+            <div>
+                <label for="guests">Guests:</label>
+                <input type="number" id="guests" name="guests" min="1" value="{{ request.GET.guests|default:1 }}">
+            </div>
+            <div>
+                <label for="rooms">Rooms:</label>
+                <input type="number" id="rooms" name="rooms" min="1" value="{{ request.GET.rooms|default:1 }}">
+            </div>
+            <button type="submit">Update Search</button> <!-- Place the button on the same line -->
+        </div>
+    </form>
+
+    <!-- Sort By Dropdown -->
+    <form method="GET" action="">
+        <label for="sort">Sort By:</label>
+        <select name="sort" id="sort" onchange="this.form.submit()">
+            <option value="popular" {% if request.GET.sort == 'popular' %}selected{% endif %}>Most Popular</option>
+            <option value="low-to-high" {% if request.GET.sort == 'low-to-high' %}selected{% endif %}>Price - Low to High</option>
+            <option value="high-to-low" {% if request.GET.sort == 'high-to-low' %}selected{% endif %}>Price - High to Low</option>
+        </select>
+    </form>
+
+    <div class="hotel-container">
+        {% for hotel in hotels %}
+            <div class="hotel-card" onclick="goToBooking('{{ hotel.id }}')">
+                <h3>{{ hotel.name }}</h3>
+                <img src="{{ hotel.image }}" alt="{{ hotel.name }}">
+                <p class="rating">Rating: {{ hotel.rating }} / 5</p>
+                <p class="room-type">Room Type: {{ hotel.room_type }}</p>
+                <p class="price">Price: ₹{{ hotel.price }}</p>
+                <a href="{% url 'booking' hotel.id %}" class="btn btn-primary click-button">Book Now</a>
+            </div>
+        {% empty %}
+            <p>No hotels found.</p>
+        {% endfor %}
+    </div>
+
+    <script>
+        // JavaScript function to handle card click
+        function goToBooking(hotelId) {
+            window.location.href = `/booking/${hotelId}`;
+        }
+    </script>
+</body>
+</html>
